@@ -2,12 +2,12 @@ package com.woxsen.studentinitiatives.dao.impl;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.woxsen.studentinitiatives.dao.UserDAO;
 import com.woxsen.studentinitiatives.entities.Club;
 import com.woxsen.studentinitiatives.entities.User;
+import com.woxsen.studentinitiatives.exceptions.InvalidCredentialsException;
 
 import jakarta.persistence.EntityManager;
 
@@ -33,18 +33,26 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void deleteByEmail(String email) {
 		Session session = entityManager.unwrap(Session.class);
-		
-		session.remove(email);
+		User user = session.get(User.class, email);
+		session.remove(user);
 	}
 
 	@Override
-	public Club loginAndGetClubID(User user) {
+	public Club loginAndGetClubID(User user) throws InvalidCredentialsException {
 		
 		Session session = entityManager.unwrap(Session.class);
 		
-		User 
+		User result = session.get(User.class, user.getEmail());
+		if(result == null) throw new InvalidCredentialsException("Wrong email");
 		
-		return null;
+		if(result.getPassword().equals(user.getPassword())) return result.getClub();
+		else throw new InvalidCredentialsException("Wrong password");
+		
+//		if((User) session.createSelectionQuery("").getSingleResultOrNull() == null)
+//		return null;
+//		
+//		else
+//		return user.getClub();
 	}
 
 }
