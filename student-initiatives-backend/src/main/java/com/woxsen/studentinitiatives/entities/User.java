@@ -4,7 +4,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -19,8 +18,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	@JoinColumn(name = "email")
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private Club club;
 	
 	public String getEmail() {
@@ -43,10 +41,11 @@ public class User {
 	}
 	
 	public User() {}
-	public User(String email, String password) {
+	public User(String email, String password, Club club) {
 		super();
 		this.email = email;
 		this.password = password;
+		this.club = club;
 	}
 	
 }

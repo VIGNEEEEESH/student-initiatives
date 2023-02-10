@@ -1,10 +1,13 @@
 package com.woxsen.studentinitiatives.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,8 +23,10 @@ public class Club {
 	@Column(name = "club_name")
 	private String clubName;
 	
-	@Column(name = "president_name")
-	private String presidentEmail;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "president_email")
+	private User user;
+	
 	
 	@Column(name = "president_name")
 	private String presidentName;
@@ -29,13 +34,46 @@ public class Club {
 	@Column(name = "vice_president_name")
 	private String vicePresidentName;
 
-	public Club(String clubName, String presidentEmail, String presidentName, String vicePresidentName) {
+	public Club(String clubName, String presidentName, String vicePresidentName, User user) {
 		this.clubName = clubName;
-		this.presidentEmail = presidentEmail;
+		this.user = user;
 		this.presidentName = presidentName;
 		this.vicePresidentName = vicePresidentName;
 	}
 	
+	public int getClubId() {
+		return clubId;
+	}
+
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
+	}
+
+	public String getClubName() {
+		return clubName;
+	}
+
+	public void setClubName(String clubName) {
+		this.clubName = clubName;
+	}
+
+
+	public String getPresidentName() {
+		return presidentName;
+	}
+
+	public void setPresidentName(String presidentName) {
+		this.presidentName = presidentName;
+	}
+
+	public String getVicePresidentName() {
+		return vicePresidentName;
+	}
+
+	public void setVicePresidentName(String vicePresidentName) {
+		this.vicePresidentName = vicePresidentName;
+	}
+
 	public Club() {}
 	
 	
