@@ -39,11 +39,10 @@ public class UserREST {
 	
 	@GetMapping("/user/{email}/{password}")
 	public Object login(@PathVariable String email, @PathVariable String password) {
-		System.out.println("=>>>>>>>>>>>>>>>>>> email = "+email+ " and password = "+password);
 		User user = new User(email, password, null);
 		try {
 		Club club = userService.loginAndGetClubID(user);
-		System.out.println(club.getClubName());
+		System.out.println(club);
 		return club;
 		}
 		catch(InvalidCredentialsException e)

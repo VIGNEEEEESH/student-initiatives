@@ -1,5 +1,7 @@
 package com.woxsen.studentinitiatives.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +20,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@JsonManagedReference
 	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private Club club;
 	
@@ -47,5 +50,5 @@ public class User {
 		this.password = password;
 		this.club = club;
 	}
-	
+
 }
