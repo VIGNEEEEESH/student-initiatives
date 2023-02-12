@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class SchoolREST {
 	}
 	
 	//NOT TESTED
+	@CrossOrigin
 	@PostMapping(value = "/school/")
 	public ResponseEntity<String> addSchool(School school) {
 		schoolService.add(school);
@@ -36,22 +38,26 @@ public class SchoolREST {
 	
 	
 	//NOT WORKING. NEED TO FIX
+	@CrossOrigin
 	@DeleteMapping(value = "/school/{schoolId}")
 	public ResponseEntity<String> deleteSchool(@PathVariable int schoolId){
 		schoolService.removeById(schoolId);
 		return ResponseEntity.status(HttpStatus.OK).body("The school was deleted");
 	}
 	
+	@CrossOrigin
 	@GetMapping(value = "/school/{schoolId}/clubs")
 	public List<Club> getClubList(@PathVariable int schoolId){
 		return schoolService.getClubListBySchoolId(schoolId);
 	}
 	
+	@CrossOrigin
 	@GetMapping(value = "/school/{schoolId}", produces = "application/json")
 	public School getSchoolById(@PathVariable int schoolId) {
 		return schoolService.getById(schoolId);
 	}
 	
+	@CrossOrigin
 	@GetMapping(value = "/school/")
 	public List<School> getSchools(){
 		return schoolService.getSchools();

@@ -3,6 +3,7 @@ package com.woxsen.studentinitiatives.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,17 +27,20 @@ public class UserREST {
 		this.userService = userService;
 	}
 	
+	@CrossOrigin
 	@PostMapping(value = "/user/")
 	public void saveUser(@RequestBody User user) {
 		System.out.println("Executed");
 		userService.save(user);
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/user/{email}")
 	public void deleteUser(@PathVariable String email) {
 		userService.deleteByEmail(email);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/user/{email}/{password}")
 	public Object login(@PathVariable String email, @PathVariable String password) {
 		User user = new User(email, password, null);
