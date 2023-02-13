@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.woxsen.studentinitiatives.dao.ClubDAO;
 import com.woxsen.studentinitiatives.entities.Club;
+import com.woxsen.studentinitiatives.entities.misc.ClubAdd;
 import com.woxsen.studentinitiatives.exceptions.NoSuchFileFoundException;
 import com.woxsen.studentinitiatives.service.ClubService;
 
@@ -48,6 +49,14 @@ public class ClubServiceImpl implements ClubService {
 	@Transactional
 	public void deleteById(int clubId) {
 		clubDAO.deleteById(clubId);
+	}
+
+
+	@Override
+	@Transactional
+	public int add(ClubAdd club) {
+		return clubDAO.add(club);
+		
 	}
 
 }

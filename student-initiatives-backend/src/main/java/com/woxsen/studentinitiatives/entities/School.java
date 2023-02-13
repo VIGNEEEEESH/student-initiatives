@@ -26,7 +26,7 @@ public class School {
 	@Column(name = "school_name")
 	private String schoolName;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "school")
 	@OneToMany(mappedBy = "school",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, 
 			fetch = FetchType.LAZY)
 	private List<Club> clubs;

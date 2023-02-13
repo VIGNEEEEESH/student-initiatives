@@ -27,12 +27,12 @@ public class Club {
 	@Column(name = "club_name")
 	private String clubName;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "email")
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "president_email")
 	private User user;
 	
-	@JsonBackReference
+	@JsonBackReference(value = "school")
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	private School school;
@@ -51,11 +51,18 @@ public class Club {
 
 	public Club(int clubId, String clubName, User user, School school, String presidentName, String vicePresidentName,
 			String mission, String vision) {
-		super();
 		this.clubId = clubId;
 		this.clubName = clubName;
 		this.user = user;
 		this.school = school;
+		this.presidentName = presidentName;
+		this.vicePresidentName = vicePresidentName;
+		this.mission = mission;
+		this.vision = vision;
+	}
+	
+	public Club(String clubName, String presidentName, String vicePresidentName, String mission, String vision) {
+		this.clubName = clubName;
 		this.presidentName = presidentName;
 		this.vicePresidentName = vicePresidentName;
 		this.mission = mission;

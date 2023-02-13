@@ -28,7 +28,6 @@ public class SchoolREST {
 		this.schoolService = schoolService;
 	}
 	
-	//NOT TESTED
 	@CrossOrigin
 	@PostMapping(value = "/school/")
 	public ResponseEntity<String> addSchool(School school) {
@@ -37,7 +36,6 @@ public class SchoolREST {
 	}
 	
 	
-	//NOT WORKING. NEED TO FIX
 	@CrossOrigin
 	@DeleteMapping(value = "/school/{schoolId}")
 	public ResponseEntity<String> deleteSchool(@PathVariable int schoolId){

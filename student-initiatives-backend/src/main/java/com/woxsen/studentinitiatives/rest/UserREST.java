@@ -17,6 +17,8 @@ import com.woxsen.studentinitiatives.entities.User;
 import com.woxsen.studentinitiatives.exceptions.InvalidCredentialsException;
 import com.woxsen.studentinitiatives.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class UserREST {
@@ -29,15 +31,17 @@ public class UserREST {
 	
 	@CrossOrigin
 	@PostMapping(value = "/user/")
-	public void saveUser(@RequestBody User user) {
+	public ResponseEntity<String> saveUser(@RequestBody @Valid User user) {
 		System.out.println("Executed");
 		userService.save(user);
+		return ResponseEntity.ok("Added user");
 	}
 	
 	@CrossOrigin
 	@DeleteMapping("/user/{email}")
-	public void deleteUser(@PathVariable String email) {
+	public ResponseEntity<String> deleteUser(@PathVariable String email) {
 		userService.deleteByEmail(email);
+		return ResponseEntity.ok("Deleted User");
 	}
 	
 	@CrossOrigin
