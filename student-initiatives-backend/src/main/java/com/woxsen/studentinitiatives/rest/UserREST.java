@@ -3,6 +3,7 @@ package com.woxsen.studentinitiatives.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import com.woxsen.studentinitiatives.entities.User;
 import com.woxsen.studentinitiatives.exceptions.InvalidCredentialsException;
 import com.woxsen.studentinitiatives.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class UserREST {
@@ -26,24 +29,28 @@ public class UserREST {
 		this.userService = userService;
 	}
 	
+	@CrossOrigin
 	@PostMapping(value = "/user/")
-	public void saveUser(@RequestBody User user) {
+	public ResponseEntity<String> saveUser(@RequestBody @Valid User user) {
 		System.out.println("Executed");
 		userService.save(user);
+		return ResponseEntity.ok("Added user");
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/user/{email}")
-	public void deleteUser(@PathVariable String email) {
+	public ResponseEntity<String> deleteUser(@PathVariable String email) {
 		userService.deleteByEmail(email);
+		return ResponseEntity.ok("Deleted User");
 	}
 	
+	@CrossOrigin
 	@GetMapping("/user/{email}/{password}")
 	public Object login(@PathVariable String email, @PathVariable String password) {
-		System.out.println("=>>>>>>>>>>>>>>>>>> email = "+email+ " and password = "+password);
 		User user = new User(email, password, null);
 		try {
 		Club club = userService.loginAndGetClubID(user);
-		System.out.println(club.getClubName());
+		System.out.println(club);
 		return club;
 		}
 		catch(InvalidCredentialsException e)

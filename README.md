@@ -39,7 +39,7 @@
 <td>Adds a new user</td>
 </tr>
 <tr>
-<td>/api/{email}</td>
+<td>/api/user/{email}</td>
 <td>DELETE</td>
 <td>The {email} path variable</td>
 <td>Nothing</td>
