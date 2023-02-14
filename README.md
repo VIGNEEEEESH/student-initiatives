@@ -37,14 +37,8 @@
 <p>"clubId" : number</p>
 <p>"clubName" : string</p>
 <p>"presidentName" : string</p>
-<p>"vicePresidentName" : string</p><tr>
-<th>URL</th>
-<th>Method</th>
-<th>Consumes</th>
-<th>Produces</th>
-<th>Description</th>
-</tr>
-<p>}</p> 
+<p>"vicePresidentName" : string</p>
+<p>}</p> </td>
 </td>
 <td>Provided that the email-password combination is correct, returns a json containing information on the club the email is linked to.</td>
 </tr>
@@ -57,13 +51,8 @@
 <p>"email" : string</p>
 <p>"password" : string</p>
 <p>}</p>
-</td><tr>
-<th>URL</th>
-<th>Method</th>
-<th>Consumes</th>
-<th>Produces</th>
-<th>Description</th>
-</tr>
+</td>
+
 <td>JSON with HTTP code</td>
 <td>Adds a new user</td>
 </tr>
@@ -78,13 +67,9 @@
 </td>
 <td>JSON with HTTP code</td>
 <td>Deletes the user with those credentials AND the club associated with that user</td>
-</tr><tr>
-<th>URL</th>
-<th>Method</th>
-<th>Consumes</th>
-<th>Produces</th>
-<th>Description</th>
 </tr>
+</table>
+
 ## School-related
 
 <table>
@@ -104,13 +89,7 @@
 <td>Gets the list of all schools available in the DB</td>
 </tr>
 <tr>
-<td>/api/school/{schoolId}/clubs</td><tr>
-<th>URL</th>
-<th>Method</th>
-<th>Consumes</th>
-<th>Produces</th>
-<th>Description</th>
-</tr>
+<td>/api/school/{schoolId}/clubs</td>
 <td>GET</td>
 <td>The {schoolId} path variable</td>
 <td><p>JSON Format - </p>
@@ -167,13 +146,7 @@
 <tr>
 <td>/api/club/</td>
 <td>POST</td>
-<td>JSON Format - <tr>
-<th>URL</th>
-<th>Method</th>
-<th>Consumes</th>
-<th>Produces</th>
-<th>Description</th>
-</tr>
+<td>JSON Format -
 <p>{</p>
 <p>"clubName": string, </p>
 <p>"presidentName": string,</p>
