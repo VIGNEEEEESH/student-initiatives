@@ -31,10 +31,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void deleteByEmail(String email) {
+	public void delete(User user) throws InvalidCredentialsException {
 		Session session = entityManager.unwrap(Session.class);
-		User user = session.get(User.class, email);
-		session.remove(user);
+		User userInDB = session.get(User.class, user.getEmail());
+		if((userInDB!=null) && (userInDB.getPassword() == user.getPassword()))
+			session.remove(user);
+		else throw new InvalidCredentialsException("Either password or email is wrong");
 	}
 
 	@Override
@@ -48,11 +50,6 @@ public class UserDAOImpl implements UserDAO {
 		if(result.getPassword().equals(user.getPassword())) return result.getClub();
 		else throw new InvalidCredentialsException("Wrong password");
 		
-//		if((User) session.createSelectionQuery("").getSingleResultOrNull() == null)
-//		return null;
-//		
-//		else
-//		return user.getClub();
 	}
 
 }

@@ -38,9 +38,9 @@ public class UserREST {
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("/user/{email}")
-	public ResponseEntity<String> deleteUser(@PathVariable String email) {
-		userService.deleteByEmail(email);
+	@DeleteMapping("/user/")
+	public ResponseEntity<String> deleteUser(@RequestBody User user) throws InvalidCredentialsException {
+		userService.delete(user);
 		return ResponseEntity.ok("Deleted User");
 	}
 	

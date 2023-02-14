@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void deleteByEmail(String email) {
-		userDAO.deleteByEmail(email);
+	public void delete(User user) throws InvalidCredentialsException {
+		userDAO.delete(user);
 	}
 
 	@Override
