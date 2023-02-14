@@ -11,6 +11,7 @@ import com.woxsen.studentinitiatives.entities.Club;
 import com.woxsen.studentinitiatives.entities.School;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 
 @Repository
 public class SchoolDAOImpl implements SchoolDAO {
@@ -35,7 +36,7 @@ public class SchoolDAOImpl implements SchoolDAO {
 		Session session = entityManager.unwrap(Session.class);
 		
 		School school = session.get(School.class, schoolId);
-		
+		if(school == null) throw new EntityNotFoundException("No school with id="+schoolId+" exists");
 		session.remove(school);
 	}
 
@@ -43,6 +44,8 @@ public class SchoolDAOImpl implements SchoolDAO {
 	public List<Club> getClubListBySchoolId(int schoolId) {
 		Session session = entityManager.unwrap(Session.class);
 		School school = session.get(School.class, schoolId);
+		if(school == null) throw new EntityNotFoundException("No school with id="+schoolId+" exists");
+		
 		return school.getClubs();
 	}
 
@@ -51,7 +54,11 @@ public class SchoolDAOImpl implements SchoolDAO {
 	public School getById(int schoolId) {
 		Session session = entityManager.unwrap(Session.class);
 		
-		return session.get(School.class, schoolId);
+		School school = session.get(School.class, schoolId);
+		
+		if(school == null) throw new EntityNotFoundException("No school with id="+schoolId+" exists");
+		
+		return school;
 	}
 
 

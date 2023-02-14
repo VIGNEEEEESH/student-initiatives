@@ -58,6 +58,8 @@ public class ClubDAOImpl implements ClubDAO {
 		
 		Club club = session.get(Club.class, clubId);
 		
+		if(club==null) throw new EntityNotFoundException("No club with clubId="+clubId+" exists");
+		
 		return club;
 	}
 
@@ -83,6 +85,9 @@ public class ClubDAOImpl implements ClubDAO {
 		
 		School school = session.get(School.class, club.getSchoolId());
 		User user = session.get(User.class, club.getEmail());
+		
+		if(school == null) throw new EntityNotFoundException("No school with schoolId="+club.getSchoolId()+" exists");
+		if(user == null) throw new EntityNotFoundException("No user with email="+club.getEmail()+" exists");
 		
 		Club clubToAdd = new Club(club.getClubName(), club.getPresidentName(), club.getVicePresidentName(), club.getMission(), club.getVision());
 		clubToAdd.setSchool(school);

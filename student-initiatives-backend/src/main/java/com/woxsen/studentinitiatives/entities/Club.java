@@ -28,7 +28,7 @@ public class Club {
 	private String clubName;
 	
 	@JsonBackReference(value = "email")
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "president_email")
 	private User user;
 	
